@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Pages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            text-align: center;
+            background-color: #0073e6;
+            color: white;
+            margin: 0;
+            padding: 10px;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+        .section h3 {
+            margin: 0;
+            padding: 10px;
+            background: #f4f4f4;
+            border-bottom: 1px solid #ddd;
+            font-size: 18px;
+        }
+        .button-container {
+            text-align: center;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #0073e6;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h2>Reservation System Login</h2>
+
+    <div class="section">
+        <h3>Login Page</h3>
+        <iframe id="loginFrame" src="https://cms3-reservationen-sins.backslash.ch/login.cfm"></iframe>
+    </div>
+
+    <div class="button-container">
+        <button id="loadPagesButton" disabled>Load Reservation Pages</button>
+    </div>
+
+    <div id="reservationPages" style="display: none;">
+        <div class="section">
+            <h3>Küngsmattsaal</h3>
+            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=36&gid=35"></iframe>
+        </div>
+
+        <div class="section">
+            <h3>Proberaum</h3>
+            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=37&gid=35"></iframe>
+        </div>
+
+        <div class="section">
+            <h3>Mehrzweckraum</h3>
+            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=38&gid=35"></iframe>
+        </div>
+
+        <div class="section">
+            <h3>Sitzungszimmer</h3>
+            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=39&gid=35"></iframe>
+        </div>
+
+        <div class="section">
+            <h3>Foyer EG inkl. WC</h3>
+            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=40&gid=35"></iframe>
+        </div>
+
+        <div class="section">
+            <h3>Küche inkl. Geschirr</h3>
+            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=41&gid=35"></iframe>
+        </div>
+
+        <div class="section">
+            <h3>Außenanlage</h3>
+            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=42&gid=35"></iframe>
+        </div>
+
+        <div class="section">
+            <h3>Bühne</h3>
+            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=43&gid=35"></iframe>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginFrame').addEventListener('load', function() {
+            const button = document.getElementById('loadPagesButton');
+            button.disabled = false;
+        });
+
+        document.getElementById('loadPagesButton').addEventListener('click', function() {
+            document.getElementById('reservationPages').style.display = 'block';
+            this.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
