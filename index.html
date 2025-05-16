@@ -136,62 +136,6 @@
     </div>
 
     <div id="reservationPages">
-        <div class="section">
-            <div class="section-header">
-                <h3>Küngsmattsaal</h3>
-                <button class="reload-button" data-target-iframe="iframe-kuengsmattsaal">Neu laden</button>
-            </div>
-            <iframe id="iframe-kuengsmattsaal" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=36&gid=35"></iframe>
-        </div>
-        <div class="section">
-            <div class="section-header">
-                <h3>Bühne</h3>
-                <button class="reload-button" data-target-iframe="iframe-buehne">Neu laden</button>
-            </div>
-            <iframe id="iframe-buehne" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=43&gid=35"></iframe>
-        </div>
-        <div class="section">
-            <div class="section-header">
-                <h3>Küche inkl. Geschirr</h3>
-                <button class="reload-button" data-target-iframe="iframe-kueche">Neu laden</button>
-            </div>
-            <iframe id="iframe-kueche" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=41&gid=35"></iframe>
-        </div>
-        <div class="section">
-            <div class="section-header">
-                <h3>Foyer EG inkl. WC</h3>
-                <button class="reload-button" data-target-iframe="iframe-foyer">Neu laden</button>
-            </div>
-            <iframe id="iframe-foyer" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=40&gid=35"></iframe>
-        </div>
-        <div class="section">
-            <div class="section-header">
-                <h3>Proberaum</h3>
-                <button class="reload-button" data-target-iframe="iframe-proberaum">Neu laden</button>
-            </div>
-            <iframe id="iframe-proberaum" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=37&gid=35"></iframe>
-        </div>
-        <div class="section">
-            <div class="section-header">
-                <h3>Mehrzweckraum</h3>
-                <button class="reload-button" data-target-iframe="iframe-mehrzweckraum">Neu laden</button>
-            </div>
-            <iframe id="iframe-mehrzweckraum" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=38&gid=35"></iframe>
-        </div>
-        <div class="section">
-            <div class="section-header">
-                <h3>Sitzungszimmer</h3>
-                <button class="reload-button" data-target-iframe="iframe-sitzungszimmer">Neu laden</button>
-            </div>
-            <iframe id="iframe-sitzungszimmer" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=39&gid=35"></iframe>
-        </div>
-        <div class="section">
-            <div class="section-header">
-                <h3>Aussenanlage</h3>
-                <button class="reload-button" data-target-iframe="iframe-aussenanlage">Neu laden</button>
-            </div>
-            <iframe id="iframe-aussenanlage" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=42&gid=35"></iframe>
-        </div>
     </div>
 
     <script>
@@ -206,7 +150,78 @@
             window.print();
         });
 
-        // Add event listeners to reload buttons
+        // Data for the reservation sections
+        const reservationSections = [{
+            title: 'Küngsmattsaal',
+            id: 'iframe-kuengsmattsaal',
+            src: 'https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=36&gid=35'
+        }, {
+            title: 'Bühne',
+            id: 'iframe-buehne',
+            src: 'https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=43&gid=35'
+        }, {
+            title: 'Küche inkl. Geschirr',
+            id: 'iframe-kueche',
+            src: 'https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=41&gid=35'
+        }, {
+            title: 'Foyer EG inkl. WC',
+            id: 'iframe-foyer',
+            src: 'https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=40&gid=35'
+        }, {
+            title: 'Proberaum',
+            id: 'iframe-proberaum',
+            src: 'https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=37&gid=35'
+        }, {
+            title: 'Mehrzweckraum',
+            id: 'iframe-mehrzweckraum',
+            src: 'https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=38&gid=35'
+        }, {
+            title: 'Sitzungszimmer',
+            id: 'iframe-sitzungszimmer',
+            src: 'https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=39&gid=35'
+        }, {
+            title: 'Aussenanlage',
+            id: 'iframe-aussenanlage',
+            src: 'https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=42&gid=35'
+        }];
+
+        const reservationPagesDiv = document.getElementById('reservationPages');
+
+        // Function to create and append a section
+        function createReservationSection(sectionData) {
+            const sectionDiv = document.createElement('div');
+            sectionDiv.classList.add('section');
+
+            const sectionHeaderDiv = document.createElement('div');
+            sectionHeaderDiv.classList.add('section-header');
+
+            const h3 = document.createElement('h3');
+            h3.textContent = sectionData.title;
+
+            const reloadButton = document.createElement('button');
+            reloadButton.classList.add('reload-button');
+            reloadButton.textContent = 'Neu laden';
+            reloadButton.setAttribute('data-target-iframe', sectionData.id);
+
+            sectionHeaderDiv.appendChild(h3);
+            sectionHeaderDiv.appendChild(reloadButton);
+
+            const iframe = document.createElement('iframe');
+            iframe.setAttribute('id', sectionData.id);
+            iframe.setAttribute('src', sectionData.src);
+
+            sectionDiv.appendChild(sectionHeaderDiv);
+            sectionDiv.appendChild(iframe);
+
+            reservationPagesDiv.appendChild(sectionDiv);
+        }
+
+        // Create all sections on page load
+        reservationSections.forEach(sectionData => {
+            createReservationSection(sectionData);
+        });
+
+        // Add event listeners to reload buttons (now applied after elements are created)
         document.querySelectorAll('.reload-button').forEach(button => {
             button.addEventListener('click', function() {
                 const iframeId = this.getAttribute('data-target-iframe');
