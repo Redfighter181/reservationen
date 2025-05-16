@@ -104,7 +104,9 @@
                 padding: 0;
             }
             #loginSection,
-            .button-container {
+            .button-container,
+            .room-navigation {
+                /* Hide navigation in print */
                 display: none;
                 /* Schritt 1 und Buttons werden ausgeblendet */
             }
@@ -113,11 +115,59 @@
             }
             .section {
                 page-break-inside: avoid;
-                margin: 0;
+                margin-bottom: 20px;
+                /* Add space between sections in print */
                 padding: 10px;
                 border: none;
                 box-shadow: none;
             }
+            /* Ensure iframes fill the width in print */
+            .section iframe {
+                width: 100%;
+            }
+        }
+        /* Added styles for navigation */
+        
+        .room-navigation {
+            text-align: center;
+            margin: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            /* Added Flexbox for better layout */
+            display: flex;
+            flex-wrap: wrap;
+            /* Allow items to wrap on smaller screens */
+            justify-content: center;
+            /* Center the items */
+            gap: 10px;
+            /* Add space between links */
+        }
+        
+        .room-navigation a {
+            margin: 0;
+            /* Remove margin, replaced by gap */
+            padding: 5px 10px;
+            /* Add some padding around links */
+            text-decoration: none;
+            color: #0073e6;
+            font-weight: bold;
+            border: 1px solid #0073e6;
+            /* Optional: Add a subtle border */
+            border-radius: 3px;
+            /* Optional: Rounded corners for links */
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            /* Smooth transition */
+        }
+        
+        .room-navigation a:hover {
+            text-decoration: none;
+            /* Remove underline on hover */
+            background-color: #0073e6;
+            /* Highlight on hover */
+            color: white;
+            /* Change text color on hover */
         }
     </style>
 </head>
@@ -133,6 +183,10 @@
     <div class="button-container">
         <button id="loadPagesButton" style="display: none;">Reservierungsseiten laden</button>
         <button id="printButton">Drucken</button>
+    </div>
+
+    <div class="room-navigation" id="roomNavigation">
+        <!-- Room navigation links will be added here by JavaScript -->
     </div>
 
     <div id="reservationPages">
@@ -186,11 +240,14 @@
         }];
 
         const reservationPagesDiv = document.getElementById('reservationPages');
+        const roomNavigationDiv = document.getElementById('roomNavigation');
 
-        // Function to create and append a section
+        // Function to create and append a section and a navigation link
         function createReservationSection(sectionData) {
+            // Create section elements
             const sectionDiv = document.createElement('div');
             sectionDiv.classList.add('section');
+            sectionDiv.setAttribute('id', sectionData.id + '-section'); // Add ID to the section div for scrolling
 
             const sectionHeaderDiv = document.createElement('div');
             sectionHeaderDiv.classList.add('section-header');
@@ -214,14 +271,20 @@
             sectionDiv.appendChild(iframe);
 
             reservationPagesDiv.appendChild(sectionDiv);
+
+            // Create navigation link
+            const navLink = document.createElement('a');
+            navLink.setAttribute('href', '#' + sectionData.id + '-section');
+            navLink.textContent = sectionData.title;
+            roomNavigationDiv.appendChild(navLink);
         }
 
-        // Create all sections on page load
+        // Create all sections and navigation links on page load
         reservationSections.forEach(sectionData => {
             createReservationSection(sectionData);
         });
 
-        // Add event listeners to reload buttons (now applied after elements are created)
+        // Add event listeners to reload buttons
         document.querySelectorAll('.reload-button').forEach(button => {
             button.addEventListener('click', function() {
                 const iframeId = this.getAttribute('data-target-iframe');
@@ -230,6 +293,20 @@
                     const currentSrc = iframe.src;
                     iframe.src = ''; // Clear src to force reload
                     iframe.src = currentSrc;
+                }
+            });
+        });
+
+        // Add event listeners for smooth scrolling to navigation links
+        document.querySelectorAll('.room-navigation a').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default jump
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
