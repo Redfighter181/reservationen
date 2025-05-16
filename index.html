@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             padding: 0;
             background-color: #f9f9f9;
         }
+        
         h2 {
             text-align: center;
             background-color: #0073e6;
@@ -19,12 +21,14 @@
             margin: 0;
             padding: 10px;
         }
+        
         iframe {
             width: 100%;
             height: 400px;
             border: 1px solid #ddd;
             margin-bottom: 20px;
         }
+        
         .section {
             margin: 20px;
             padding: 10px;
@@ -32,6 +36,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             background: #fff;
         }
+        
         .section h3 {
             margin: 0;
             padding: 10px;
@@ -39,10 +44,12 @@
             border-bottom: 1px solid #ddd;
             font-size: 18px;
         }
+        
         .button-container {
             text-align: center;
             margin: 20px;
         }
+        
         button {
             padding: 10px 20px;
             font-size: 16px;
@@ -52,19 +59,54 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        
         button:disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f4f4f4;
+            border-bottom: 1px solid #ddd;
+            padding: 0 10px;
+        }
+        
+        .section-header h3 {
+            margin: 0;
+            padding: 10px 0;
+            background: none;
+            /* Override section h3 background */
+            border-bottom: none;
+            /* Override section h3 border */
+            font-size: 18px;
+        }
+        
+        .reload-button {
+            padding: 3px 8px;
+            font-size: 12px;
+            background-color: #6c757d;
+            /* Unauffälligere Farbe */
+            border-radius: 3px;
+        }
+        
+        .reload-button:hover {
+            background-color: #5a6268;
+        }
         /* Druckansicht */
+        
         @media print {
             body {
                 background-color: white;
                 margin: 0;
                 padding: 0;
             }
-            #loginSection, .button-container {
-                display: none; /* Schritt 1 und Buttons werden ausgeblendet */
+            #loginSection,
+            .button-container {
+                display: none;
+                /* Schritt 1 und Buttons werden ausgeblendet */
             }
             iframe {
                 height: 450px;
@@ -79,51 +121,76 @@
         }
     </style>
 </head>
+
 <body>
     <h2>Reservationen</h2>
 
     <div id="loginSection" class="section">
         <h3>Schritt 1: Login</h3>
-        <p>Bitte <a href="https://cms3-reservationen-sins.backslash.ch/login.cfm" target="_blank">hier klicken, um sich anzumelden</a>. Die Anmeldeseite wird in einem neuen Tab geöffnet. Nach der Anmeldung kehren Sie zu dieser Seite zurück und drücken Sie den untenstehenden Knopf, um die Reservierungsseiten zu laden.</p>
+        <p>Falls es Probleme beim Anzeigen der Reservationen gibt, müssen Sie sich möglicherweise zuerst <a href="https://cms3-reservationen-sins.backslash.ch/login.cfm" target="_blank">hier anmelden</a>. Die Anmeldeseite wird in einem neuen Tab geöffnet.</p>
     </div>
 
     <div class="button-container">
-        <button id="loadPagesButton">Reservierungsseiten laden</button>
-        <button id="printButton" style="display: none;">Drucken</button>
+        <button id="loadPagesButton" style="display: none;">Reservierungsseiten laden</button>
+        <button id="printButton">Drucken</button>
     </div>
 
-    <div id="reservationPages" style="display: none;">
+    <div id="reservationPages">
         <div class="section">
-            <h3>Küngsmattsaal</h3>
-            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=36&gid=35"></iframe>
+            <div class="section-header">
+                <h3>Küngsmattsaal</h3>
+                <button class="reload-button" data-target-iframe="iframe-kuengsmattsaal">Neu laden</button>
+            </div>
+            <iframe id="iframe-kuengsmattsaal" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=36&gid=35"></iframe>
         </div>
         <div class="section">
-            <h3>Bühne</h3>
-            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=43&gid=35"></iframe>
+            <div class="section-header">
+                <h3>Bühne</h3>
+                <button class="reload-button" data-target-iframe="iframe-buehne">Neu laden</button>
+            </div>
+            <iframe id="iframe-buehne" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=43&gid=35"></iframe>
         </div>
         <div class="section">
-            <h3>Küche inkl. Geschirr</h3>
-            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=41&gid=35"></iframe>
+            <div class="section-header">
+                <h3>Küche inkl. Geschirr</h3>
+                <button class="reload-button" data-target-iframe="iframe-kueche">Neu laden</button>
+            </div>
+            <iframe id="iframe-kueche" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=41&gid=35"></iframe>
         </div>
         <div class="section">
-            <h3>Foyer EG inkl. WC</h3>
-            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=40&gid=35"></iframe>
+            <div class="section-header">
+                <h3>Foyer EG inkl. WC</h3>
+                <button class="reload-button" data-target-iframe="iframe-foyer">Neu laden</button>
+            </div>
+            <iframe id="iframe-foyer" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=40&gid=35"></iframe>
         </div>
         <div class="section">
-            <h3>Proberaum</h3>
-            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=37&gid=35"></iframe>
+            <div class="section-header">
+                <h3>Proberaum</h3>
+                <button class="reload-button" data-target-iframe="iframe-proberaum">Neu laden</button>
+            </div>
+            <iframe id="iframe-proberaum" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=37&gid=35"></iframe>
         </div>
         <div class="section">
-            <h3>Mehrzweckraum</h3>
-            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=38&gid=35"></iframe>
+            <div class="section-header">
+                <h3>Mehrzweckraum</h3>
+                <button class="reload-button" data-target-iframe="iframe-mehrzweckraum">Neu laden</button>
+            </div>
+            <iframe id="iframe-mehrzweckraum" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=38&gid=35"></iframe>
         </div>
         <div class="section">
-            <h3>Sitzungszimmer</h3>
-            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=39&gid=35"></iframe>
+            <div class="section-header">
+                <h3>Sitzungszimmer</h3>
+                <button class="reload-button" data-target-iframe="iframe-sitzungszimmer">Neu laden</button>
+            </div>
+            <iframe id="iframe-sitzungszimmer" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=39&gid=35"></iframe>
         </div>
         <div class="section">
-            <h3>Aussenanlage</h3>
-            <iframe src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=42&gid=35"></iframe>
+            <div class="section-header">
+                <h3>Aussenanlage</h3>
+                <button class="reload-button" data-target-iframe="iframe-aussenanlage">Neu laden</button>
+            </div>
+            <iframe id="iframe-aussenanlage" src="https://cms3-reservationen-sins.backslash.ch/sitemap/box/modul/reservations3_2/reservation_3/suche/suche.cfm?CFID=41b0883c-6d4c-4d0b-ab09-2efa03e627af&CFTOKEN=0&view=liste&oid=42&gid=35"></iframe>
         </div>
     </div>
 
@@ -138,6 +205,20 @@
         document.getElementById('printButton').addEventListener('click', function() {
             window.print();
         });
+
+        // Add event listeners to reload buttons
+        document.querySelectorAll('.reload-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const iframeId = this.getAttribute('data-target-iframe');
+                const iframe = document.getElementById(iframeId);
+                if (iframe) {
+                    const currentSrc = iframe.src;
+                    iframe.src = ''; // Clear src to force reload
+                    iframe.src = currentSrc;
+                }
+            });
+        });
     </script>
 </body>
+
 </html>
